@@ -1,0 +1,56 @@
+/* Set the background color to a gradient */
+body {
+  background: #333333;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  padding: 20px;
+}
+
+h2 {
+    color: #ccc;
+    text-align: center;
+}
+
+.category {
+    margin-bottom: 20px;
+}
+
+/* Center the buttons */
+button {
+  display: block;
+  margin: 10px auto;
+  width: 300px;
+  height: 80px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #555; /* Default background color */
+  color: #fff; /* Default text color */
+  transition: background-color 0.3s, background-image 0.3s; /* Smooth transition for background properties */
+}
+
+button:hover {
+    background-color: #777; /* Lighter gray on hover for all buttons */
+}
+
+/* Specific hover styles for "Wedone Web Apps" */
+.web-app:hover {
+    background-image: linear-gradient(to right, #00c6ff, #0072ff); /* Example gradient */
+}
+
+button:nth-child(3).web-app:hover {
+    background-image: linear-gradient(to right, #00ff88, #1ebd0f);
+}
+
+.button-logo {
+  height: 40px; /* Hauteur de l'image */
+  width: 40px; /* Largeur de l'image */
+  vertical-align: middle; /* Aligner l'image verticalement avec le texte */
+  margin-right: 10px; /* Espace entre l'image et le texte */
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
