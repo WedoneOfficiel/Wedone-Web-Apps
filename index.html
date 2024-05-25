@@ -13,31 +13,16 @@
         <h2>Wedone Web Apps</h2>
         <div class="category">
             <div class="button-container">
-                <div class="button-with-info">
-                    <button class="web-app todo" onmouseover="showInfo('todo-info')" onmouseout="hideInfo('todo-info')" onclick="window.location.href='Wedone-To-Do-List'">
-                        <img src="logo-todo.png" alt="Logo To Do List" class="button-logo">
-                        Wedone To Do List
-                    </button>
-                    <div id="todo-info" class="info-box">Gérez votre liste de tâches de manière simple et agréable ! Vos données ne sont conservées que sur votre ordinateur ! Mais vous pouvez les télécharger ou les importer !</div>
-                </div>
-                <div class="button-with-info">
-                    <button class="web-app qr" onmouseover="showInfo('qr-info')" onmouseout="hideInfo('qr-info')" onclick="window.location.href='Wedone-QR-Code'">
-                        <img src="logo-qr.png" alt="Logo QR Code" class="button-logo">
-                        Wedone QR Code
-                    </button>
-                    <div id="qr-info" class="info-box">Créez de manière simple et sécurisée des QR Code que vous pourrez par la suite télécharger et utiliser ! Aucune de vos données ne nous sont transmises !</div>
-                </div>
+                <button class="web-app todo" onclick="window.location.href='Wedone-To-Do-List'">
+                    <img src="logo-todo.png" alt="Logo To Do List" class="button-logo">
+                    Wedone To Do List
+                </button>
+                <button class="web-app qr" onclick="window.location.href='Wedone-QR-Code'">
+                    <img src="logo-qr.png" alt="Logo QR Code" class="button-logo">
+                    Wedone QR Code
+                </button>
             </div>
         </div>
     </div>
-    <script>
-        function showInfo(id) {
-            document.getElementById(id).style.display = 'block';
-        }
-
-        function hideInfo(id) {
-            document.getElementById(id).style.display = 'none';
-        }
-    </script>
 </body>
 </html>
