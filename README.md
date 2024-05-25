@@ -1,6 +1,6 @@
 # Wedone Web Apps
 
-Wedone Web Apps est un ensemble de logiciels mis en place par Wedone et distribués gratuitement accessibles à cette adresse : https://wedoneofficiel.github.io/Wedone-Web-Apps/
+Wedone Web Apps est un ensemble de logiciels mis en place par Wedone, distribués gratuitement et accessibles à tous à cette adresse : https://wedoneofficiel.github.io/Wedone-Web-Apps/
 
 # Wedone To Do List
 
