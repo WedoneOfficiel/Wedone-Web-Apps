@@ -92,3 +92,13 @@ h1 {
 
 }
 
+.error-message {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 16px;
+    background: linear-gradient(to right, var(--main-gradient-start), var(--main-gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}

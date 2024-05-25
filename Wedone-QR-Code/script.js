@@ -1,7 +1,17 @@
 document.getElementById('generate-qr').addEventListener('click', function() {
     var url = document.getElementById('url-input').value;
     var qrContainer = document.getElementById('qr-container');
-    qrContainer.innerHTML = '';  // Clear previous QR Code
+    var errorMessage = document.getElementById('error-message');
+    
+    // Vider les messages d'erreur précédents et le contenu du QR code
+    errorMessage.textContent = '';
+    qrContainer.innerHTML = '';  
+    
+    if (url.trim() === '') {
+        errorMessage.textContent = 'Veuillez entrer une URL valide.';
+        return;
+    }
+    
     var qrCode = new QRCode(qrContainer, {
         text: url,
         width: 256,
