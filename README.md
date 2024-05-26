@@ -4,7 +4,7 @@ Wedone Web Apps est un ensemble de logiciels mis en place par Wedone, distribué
 
 # Wedone To Do List
 
-Introduis le 21 juin 2023, Wedone To Do List permet de gérer votre liste de tâches de manière agréable et simple !
+Introduis le 21 juin 2023, Wedone To Do List permet de gérer votre liste de tâches de manière simple et agréabl  !
 <p align="center">
   <img src="https://wedoneofficiel.github.io/Wedone-Web-Apps/logo-todo.png" width="200" height="200" />
 </p>
