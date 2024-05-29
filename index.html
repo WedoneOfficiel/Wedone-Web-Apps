@@ -18,34 +18,11 @@
                     Wedone To Do List
                 </button>
                 <button class="web-app qr" onclick="window.location.href='Wedone-QR-Code'">
-                    <img src="logo-qr.png" alt="Logo QR Code" class="button-logo" id="qr-logo">
+                    <img src="logo-qr-hover.png" alt="Logo QR Code" class="button-logo" id="qr-logo">
                     Wedone QR Code
                 </button>
             </div>
         </div>
     </div>
-
-    <script>
-        // Sélectionnez le bouton du QR code
-        var qrButton = document.querySelector('.qr');
-
-        // Sélectionnez l'image du logo du QR code
-        var qrLogo = document.getElementById('qr-logo');
-
-        // Définissez l'image de survol du logo du QR code
-        var qrHoverLogo = 'logo-qr-hover.png';
-
-        // Écoutez l'événement de survol sur le bouton QR code
-        qrButton.addEventListener('mouseenter', function() {
-            // Changez l'image du logo du QR code au survol
-            qrLogo.src = qrHoverLogo;
-        });
-
-        // Écoutez l'événement de sortie du survol sur le bouton QR code
-        qrButton.addEventListener('mouseleave', function() {
-            // Changez l'image du logo du QR code à l'image normale
-            qrLogo.src = 'logo-qr.png';
-        });
-    </script>
 </body>
 </html>

@@ -1,24 +1,37 @@
 body {
-  background: #333333;
-  font-family: Arial, sans-serif;
+  background: linear-gradient(45deg, #1a1a1a, #333333);
+  font-family: 'Roboto', sans-serif;
   color: #ffffff;
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
 h2 {
-  color: #ccc;
+  color: #ffffff;
   text-align: center;
+  font-size: 36px;
+  margin-bottom: 20px; /* Réduit l'espace entre le titre et les boutons */
+  letter-spacing: 2px;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .category {
   display: flex;
-  margin-top: 20px;
+  margin-top: 10px; /* Réduit l'espace au-dessus de la catégorie */
 }
 
 .button-container {
@@ -36,21 +49,44 @@ button {
   font-size: 20px;
   border: none;
   border-radius: 10px;
-  background-color: #555;
+  background-color: rgba(85, 85, 85, 0.8);
   color: #fff;
-  transition: background-color 0.3s, background-image 0.3s;
+  transition: all 0.3s;
   margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: skewX(-45deg);
+  transition: all 0.5s;
+  z-index: 0;
+}
+
+button:hover::before {
+  left: 150%;
 }
 
 button:hover {
-  background-color: #777;
+  background-color: #555;
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.todo:hover {
+.todo {
   background-image: linear-gradient(to right, #00c6ff, #0072ff);
 }
 
-.qr:hover {
+.qr {
   background-image: linear-gradient(to right, #00ff88, #1ebd0f);
 }
 
@@ -59,4 +95,9 @@ button:hover {
   width: 40px;
   vertical-align: middle;
   margin-right: 10px;
+  z-index: 1;
+}
+
+button:hover .button-logo {
+  filter: brightness(1.2);
 }
