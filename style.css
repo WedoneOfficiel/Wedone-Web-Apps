@@ -9,6 +9,10 @@ body {
   margin: 0;
 }
 
+.hidden {
+  display: none;
+  }
+
 h2 {
   color: #ffffff;
   text-align: center;
