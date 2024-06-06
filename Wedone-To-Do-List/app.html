@@ -10,12 +10,6 @@
     </style>
 </head>
 <body>
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <p>ATTENTION : Une mise à jour majeure arrive bientôt. Sauvegardez vos données avec le bouton "Exporter" pour prévenir toute perte.</p>
-        </div>
-    </div>
     <div class="container">
         <h1>Wedone To Do List</h1>
         
@@ -46,15 +40,7 @@
     <script src="https://kit.fontawesome.com/9f4c9b8a0c.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
     <script>
-        // Afficher la popup au chargement de la page
-        window.onload = function() {
-            document.getElementById("popup").style.display = "block";
-        }
-
-        // Fonction pour fermer la popup
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
-        }
+    window.alert("ATTENTION : Une mise à jour majeure arrive bientôt. Sauvegardez vos données avec le bouton "Exporter" pour prévenir toute perte.");
     </script>
 </body>
 </html>
