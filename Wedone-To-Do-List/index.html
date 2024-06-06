@@ -1,46 +1,78 @@
-<!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
     <link rel="icon" href="icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <meta charset="UTF-8">
     <title>Wedone To Do List</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        :root {
+            --bg-color: #333333;
+            --text-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            background-image: linear-gradient(to right, #bdbaba, #333);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .welcome-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px; 
+        }
+
+        .welcome-container p {
+            font-size: 18px;
+            color: #6d6c6c;
+        }
+
+        .welcome-container button {
+            height: 40px;
+            width: 200px;
+            border-radius: 20px;
+            border: none;
+            margin-top: 10px; 
+            background-image: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+        }
+
+        a[rel="me"] {
+            display: none;
+        } 
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Wedone To Do List</h1>
-        
-         <!-- Ajouté pour la création des dossiers -->
-         <div class="input-container">
-             <input type="text" id="folder-input" placeholder="Ajouter un dossier...">
-             <button id="add-folder">+<i class="fas fa-folder-plus"></i></button>
-         </div>
-         <div class="folder-container" id="folder-container">
-             <!-- Les dossiers seront ajoutés ici -->
-         </div>
-
-        <div class="input-container">
-            <input type="text" id="task-input" placeholder="Ajouter une tâche...">
-            <button id="add-task">+<i class="fas fa-plus"></i></button>
+        <div class="welcome-container">
+            <p>Bienvenue sur Wedone To Do List, l'application qui vous aide à organiser vos tâches quotidiennes.</p>
+            <p><br>Indication : Une tâche s'ajoute dans un dossier. Vous devez donc au moins créer un dossier puis le sélectionner pour enfin ajouter une tâche. <br></p>
+            <button onclick="window.location.href='app.html'">Accéder à l'application</button>
+            <a rel="me" href="https://mastodon.social/@wedoneofficiel">Mastodon</a>
         </div>
-        <ul id="task-list">
-            <!-- Les tâches seront ajoutées ici -->
-        </ul>
-            <div class="export-import-container">
-                <button id="export">Exporter</button>
-                <button id="import">Importer</button>
-                <label for="import-file"><button style="display: none"></button></label>
-                <input type="file" id="import-file" accept=".json">
-            </div>
     </div>
-    <!-- Ajouté pour utiliser les icônes Font Awesome -->
-    <script src="https://kit.fontawesome.com/9f4c9b8a0c.js" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
-    <script>
-    window.alert("ATTENTION : Une mise à jour majeure arrive bientôt. Sauvegardez vos données avec le bouton "Exporter" pour prévenir toute perte.");
-    </script>
 </body>
 </html>
