@@ -40,24 +40,10 @@
     <script src="https://kit.fontawesome.com/9f4c9b8a0c.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
     <script>
-        // Fonction pour créer et afficher la popup
-        function showPopup() {
-            var popup = document.createElement('div');
-            popup.className = 'popup';
-            popup.innerHTML = '<p>Attention : Une mise à jour majeure arrive bientôt. Sauvegardez vos données avec le bouton "Exporter" pour prévenir toute perte.</p><button onclick="closePopup()">Fermer</button>';
-            document.body.appendChild(popup);
-        }
-
-        // Fonction pour fermer la popup
-        function closePopup() {
-            var popup = document.querySelector('.popup');
-            popup.parentNode.removeChild(popup);
-        }
-
-        // Afficher la popup au chargement de la page
+        // Afficher la popup d'avertissement
         window.onload = function() {
-            showPopup();
-        }
+            alert("ATTENTION : Une mise à jour majeure arrive bientôt. Sauvegardez vos données avec le bouton 'Exporter' pour prévenir toute perte.");
+        };
     </script>
 </body>
 </html>
