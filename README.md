@@ -1,7 +1,7 @@
 # Wedone Web Apps
 
 Wedone Web Apps est un ensemble de logiciels mis en place par Wedone, distribués gratuitement et accessibles à tous à cette adresse : https://wedoneofficiel.github.io/Wedone-Web-Apps/
-Les Wedone Web Apps comprennent à ce jour deux applications : Wedone To Do List et Wedone QR Code
+Les Wedone Web Apps comprennent à ce jour deux applications : Wedone To Do List et Wedone QR Code.
 
 # Wedone To Do List
 
