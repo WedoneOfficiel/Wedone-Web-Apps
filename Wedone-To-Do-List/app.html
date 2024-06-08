@@ -5,42 +5,77 @@
     <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <title>Wedone To Do List</title>
-    <style>
-
-    </style>
 </head>
 <body>
     <div class="container">
         <h1>Wedone To Do List</h1>
-        
-         <!-- Ajouté pour la création des dossiers -->
-         <div class="input-container">
-             <input type="text" id="folder-input" placeholder="Ajouter un dossier...">
-             <button id="add-folder">+<i class="fas fa-folder-plus"></i></button>
-         </div>
-         <div class="folder-container" id="folder-container">
-             <!-- Les dossiers seront ajoutés ici -->
-         </div>
 
-        <div class="input-container">
-            <input type="text" id="task-input" placeholder="Ajouter une tâche...">
-            <button id="add-task">+<i class="fas fa-plus"></i></button>
-        </div>
-        <ul id="task-list">
-            <!-- Les tâches seront ajoutées ici -->
-        </ul>
-            <div class="export-import-container">
-                <button id="export">Exporter</button>
-                <button id="import">Importer</button>
-                <label for="import-file"><button style="display: none"></button></label>
-                <input type="file" id="import-file" accept=".json">
+        <div class="main-content">
+            <div class="folder-section">
+                <div class="input-container">
+                    <input type="text" id="folder-input" placeholder="Ajouter un dossier...">
+                    <button id="add-folder">+<i class="fas fa-folder-plus"></i></button>
+                </div>
+                <div class="folder-container" id="folder-container">
+                    <!-- Les dossiers seront ajoutés ici -->
+                </div>
             </div>
+
+            <div class="task-section">
+                <div class="input-container">
+                    <input type="text" id="task-input" placeholder="Ajouter une tâche...">
+                    <button id="add-task">+<i class="fas fa-plus"></i></button>
+                </div>
+                <ul id="task-list">
+                    <!-- Les tâches seront ajoutées ici -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="export-import-container">
+            <button id="export">Exporter</button>
+            <button id="import">Importer</button>
+            <input type="file" id="import-file" accept=".json" style="display: none">
+        </div>
     </div>
-    <!-- Ajouté pour utiliser les icônes Font Awesome -->
-    <script src="https://kit.fontawesome.com/9f4c9b8a0c.js" crossorigin="anonymous"></script>
+
+    <!-- Fenêtre modale pour les dossiers -->
+    <div id="folder-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-folder-modal">&times;</span>
+            <h2 id="folder-modal-title">Modifier le dossier</h2>
+            <input type="text" id="folder-modal-input" placeholder="Nom du dossier">
+            <button id="save-folder-modal">Enregistrer</button>
+        </div>
+    </div>
+
+    <!-- Fenêtre modale pour les tâches -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-task-modal">&times;</span>
+            <h2 id="task-modal-title">Modifier la tâche</h2>
+            <input type="text" id="task-modal-input" placeholder="Nom de la tâche">
+            <button id="save-task-modal">Enregistrer</button>
+        </div>
+    </div>
+
+    <div id="folder-context-menu" class="context-menu">
+        <ul>
+            <li id="edit-folder">Modifier le dossier</li>
+            <li id="delete-folder">Supprimer le dossier</li>
+        </ul>
+    </div>
+    
+    <div id="task-context-menu" class="context-menu">
+        <ul>
+            <li id="edit-task">Modifier la tâche</li>
+            <li id="delete-task">Supprimer la tâche</li>
+        </ul>
+    </div>    
+
+    <div class="notification-container" id="notification-container"></div>
+
+
     <script src="script.js"></script>
-    <script>
-    window.alert("🚨ATTENTION : Une mise à jour majeure arrive bientôt. Sauvegardez vos données avec le bouton Exporter pour prévenir toute perte.");
-    </script>
 </body>
 </html>

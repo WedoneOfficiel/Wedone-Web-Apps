@@ -25,7 +25,7 @@ h1 {
     background-image: linear-gradient(to right, #bdbaba, #333);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-  }
+}
 
 .input-container {
     display: flex;
@@ -44,52 +44,51 @@ h1 {
 
 .input-container button {
     height: 40px;
-    min-width: 180px; /* Augmenter la largeur du bouton */
-    border-radius: 20px; /* Rendre les bords plus arrondis */
+    min-width: 180px;
+    border-radius: 20px;
     border: none;
     margin-left: 10px;
     background-image: linear-gradient(to right, var(--main-gradient-start), var(--main-gradient-end));
     color: white;
     cursor: pointer;
-    font-size: 16px; /* Augmenter la taille de la police pour mieux lire */
-    padding: 0 20px; /* Padding horizontal pour plus d'espace autour du texte */
+    font-size: 16px;
+    padding: 0 20px;
 }
 
 #qr-container {
     text-align: center;
     margin-top: 20px;
     display: flex;
-    justify-content: center;  /* Centrage horizontal des éléments flex */
-    align-items: center;  /* Centrage vertical des éléments flex */
-    flex-direction: column;  /* Les éléments s'empilent verticalement */
-    height: auto;  /* Ajuster en fonction de la hauteur du contenu */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: auto;
 }
 
 #qr-container canvas,
 #qr-container img {
-    max-width: 100%;  /* Assurer que le QR Code s'adapte à la largeur de son conteneur si nécessaire */
-    height: auto;  /* Hauteur automatique pour maintenir les proportions */
-    display: block;  /* S'assure que l'élément est traité comme un bloc */
-    margin: 0 auto;  /* Centrage horizontal en cas de besoin */
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 #qr-container button {
     display: block;
     margin: 20px auto;
     padding: 10px 20px;
-    min-width: 160px; /* Assurer que le bouton de téléchargement est suffisamment large */
+    min-width: 160px;
     background-image: linear-gradient(to right, var(--main-gradient-start), var(--main-gradient-end));
     color: white;
     border: none;
-    border-radius: 20px; /* Bords arrondis pour le bouton de téléchargement aussi */
+    border-radius: 20px;
     cursor: pointer;
     font-size: 16px;
 }
 
 :root {
-    --main-gradient-start: #00ff88 ; /* Vert clair */
-    --main-gradient-end: #1ebd0f;   /* Vert plus foncé */
-
+    --main-gradient-start: #00ff88;
+    --main-gradient-end: #1ebd0f;
 }
 
 .error-message {

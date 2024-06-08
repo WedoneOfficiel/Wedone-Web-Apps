@@ -8,20 +8,29 @@ body {
     font-family: Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 :root {
     --bg-color: #333333;
     --text-color: #f0f0f0;
+    --input-bg-color: #f0f0f0;
+    --input-text-color: #333333;
+    --input-border-color: #ccc;
+    --input-focus-color: #00c6ff;
+    --notification-bg-color: #4caf50;
+    --notification-text-color: #ffffff;
+    --error-color: #ff4d4d;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 20px auto;
     padding: 20px;
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
 }
 
 h1 {
@@ -30,21 +39,40 @@ h1 {
     background-image: linear-gradient(to right, #bdbaba, #333);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    transition: background-image 0.3s;
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.folder-section, .task-section {
+    flex: 1;
+    max-width: 48%;
 }
 
 .input-container {
     display: flex;
     align-items: center;
-    margin-top: 20px; /* Ajouté pour créer un espace */
+    margin-top: 20px;
 }
 
 .input-container input {
     flex-grow: 1;
     height: 40px;
     border-radius: 20px;
-    border: none;
+    border: 1px solid var(--input-border-color);
     padding: 10px;
     outline: none;
+    background-color: var(--input-bg-color);
+    color: var(--input-text-color);
+    transition: border-color 0.3s;
+}
+
+.input-container input:focus {
+    border-color: var(--input-focus-color);
 }
 
 .input-container button {
@@ -55,89 +83,327 @@ h1 {
     margin-left: 10px;
     background-image: linear-gradient(to right, #00c6ff, #0072ff);
     color: white;
+    cursor: pointer;
+    transition: background-image 0.3s;
+}
+
+.folder-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.folder {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #6d6d6d6c;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.folder:hover {
+    background-image: linear-gradient(to right, #0072ff, #00c6ff);
+}
+
+.folder.selected {
+    background-image: linear-gradient(to right, #0072ff, #00c6ff);
+    color: white;
+}
+
+.folder i {
+    margin-right: 10px;
+}
+
+.folder span {
+    flex-grow: 1;
 }
 
 ul {
     list-style-type: none;
+    padding: 0;
 }
 
 li {
     display: flex;
     align-items: center;
     margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    word-wrap: break-word; /* Pour permettre au texte de se diviser en lignes */
 }
 
 li input[type=checkbox] {
     height: 20px;
     width: 20px;
+    flex-shrink: 0; /* Assure que la taille du checkbox ne change pas */
+    appearance: none;
+    border: 2px solid #6d6c6c;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+li input[type=checkbox]:before {
+    content: '\2713';
+    font-size: 16px;
+    color: transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: color 0.3s;
+}
+
+/* Animation de la case à cocher */
+li input[type=checkbox]:checked {
+    background: linear-gradient(to right, var(--input-focus-color), #0072ff);
+    border: none;
+}
+
+li input[type=checkbox]:checked:before {
+    color: var(--text-color);
+    animation: pulse 0.5s ease;
+}
+
+/* Animation de chargement de la liste */
+@keyframes listLoad {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.folder-container, .task-list {
+    animation: listLoad 0.5s ease;
 }
 
 li span {
     margin-left: 10px;
     color: #6d6c6c;
+    transition: color 0.3s, text-decoration 0.3s;
+    word-break: break-word; /* Pour gérer les longs mots */
 }
 
 li.done span {
-    text-decoration-line: line-through;
-    color: gray;
+    text-decoration: line-through underline;
+    color: transparent;
+    background-image: linear-gradient(to right, #00b7ff, #0072ff);
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 
-li i {
-   margin-left:auto; 
-   cursor:pointer; 
-   color:red; 
+li.done {
+    background-color: transparent;
+}
+
+li .edit-task {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 10px;
+    color: var(--input-focus-color);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+li .delete-task {
+    display: flex;
+    align-items: center;
+    color: var(--error-color);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+li .edit-task:hover {
+    color: #0072ff;
+}
+
+li .delete-task:hover {
+    color: #ff4d4d;
 }
 
 .export-import-container {
-   display:flex; 
-   justify-content:center; 
-   gap:20px; 
-   margin-top:20px; 
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espace entre les boutons */
 }
 
 .export-import-container button {
-   padding:10px; 
-   border:none; 
-   border-radius:20px; 
-   background-color:#00c6ff; 
-   color:white; 
-   background-image: linear-gradient(to right, #00c6ff, #0072ff);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-image: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+    cursor: pointer;
+    transition: background-image 0.3s;
 }
 
-input[type=file] {
+.modal {
     display: none;
-  }
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
 
-  /* Ajouté pour le style des dossiers */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-  .folder-container {
-      display:flex; 
-      flex-wrap:wrap; 
-      gap:10px; 
-      margin-top:10px; 
-  }
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-  .folder {
-      display:flex; 
-      flex-direction:column; 
-      align-items:center; 
-      justify-content:center; 
-      width:100px; 
-      height:100px; 
-      border-radius:10px; 
-      background-color:#f0f0f0; 
-      color:#333333; 
-      cursor:pointer; 
-  }
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 
-  .folder i {
-      font-size:40px; 
-  }
+.modal h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
 
-  .folder span {
-      font-size:14px; 
-  }
+.modal input {
+    width: 80%;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid var(--input-border-color);
+    padding: 10px;
+    margin-bottom: 20px;
+    outline: none;
+    background-color: var(--input-bg-color);
+    color: var(--input-text-color);
+    transition: border-color 0.3s;
+}
 
-  .folder.selected {
-      border:solid 3px #00c6ff; 
-  }
+.modal input:focus {
+    border-color: var(--input-focus-color);
+}
+
+.modal button {
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    padding: 0 20px;
+    background-image: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+    cursor: pointer;
+    transition: background-image 0.3s;
+}
+
+.context-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 10;
+}
+
+.context-menu ul {
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    color: #333;
+}
+
+.context-menu ul li {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.context-menu ul li:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.context-menu ul li.delete {
+    color: var(--error-color);
+}
+
+.context-menu ul li.delete:hover {
+    background-color: var(--error-color);
+    color: white;
+}
+
+.notification-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 20px; /* Ajoutez un peu d'espace entre l'élément de notification et le bas de l'écran */
+    margin: auto;
+    width: fit-content;
+    z-index: 1000;
+}
+
+.notification-container .notification {
+    margin-bottom: 10px; /* Ajoutez un peu d'espace entre deux notifications */
+}
+
+.notification {
+    max-width: 80%; /* Ajoutez cette propriété pour définir une largeur maximale pour les notifications individuelles */
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: var(--notification-text-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fadeInOut 3s forwards;
+}
+
+.notification-success {
+    background-color: var(--notification-bg-color);
+}
+
+.notification-error {
+    background-color: var(--error-color);
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(100%); /* Modifiez la valeur de translateX à translateY et définissez une valeur appropriée */
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0); /* Modifiez la valeur de translateX à translateY et définissez une valeur appropriée */
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(0); /* Modifiez la valeur de translateX à translateY et définissez une valeur appropriée */
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100%); /* Modifiez la valeur de translateX à translateY et définissez une valeur appropriée */
+    }
+}
