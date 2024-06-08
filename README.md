@@ -18,7 +18,7 @@ Lancé le 8 mai 2024, Wedone QR Code vous permet de créer de manière simple et
 </p>
 
 # Nouveautés
-## Récapitulatif des nouveautés de la version du 08/06/2024
+## Récapitulatif des nouveautés avec la mise à jour du 08/06/2024
 - Accès maintenant direct aux applications sans passer par la page de présentation des services maintenant par défaut
 - Ajout d'un bouton paramètres permettant de réactiver l'affichage des pages de présentation des services
 - Modifications mineures de l'interface
