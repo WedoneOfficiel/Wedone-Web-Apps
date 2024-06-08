@@ -37,9 +37,15 @@ h1 {
     flex-grow: 1;
     height: 40px;
     border-radius: 20px;
-    border: none;
+    border: 1px solid #ccc;
     padding: 10px;
     outline: none;
+    background-color: #F0F0F0;
+    color: #898989;
+}
+
+.input-container input:focus {
+    border-color: #00ff88;
 }
 
 .input-container button {
@@ -63,7 +69,10 @@ h1 {
     align-items: center;
     flex-direction: column;
     height: auto;
+    /* Désactiver toute interaction avec le contenu du conteneur au survol */
+    pointer-events: none;
 }
+    
 
 #qr-container canvas,
 #qr-container img {

@@ -356,6 +356,7 @@ li .delete-task:hover {
 .context-menu ul li.delete:hover {
     background-color: var(--error-color);
     color: white;
+    border: 1px solid var(--input-border-color);
 }
 
 .notification-container {

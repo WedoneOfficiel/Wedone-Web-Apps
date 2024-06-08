@@ -1,4 +1,13 @@
-document.getElementById('generate-qr').addEventListener('click', function() {
+document.getElementById('url-input').addEventListener('keyup', function(event) {
+    // Vérifier si la touche pressée est "Entrée"
+    if (event.key === 'Enter') {
+        generateQRCode();
+    }
+});
+
+document.getElementById('generate-qr').addEventListener('click', generateQRCode);
+
+function generateQRCode() {
     var url = document.getElementById('url-input').value;
     var qrContainer = document.getElementById('qr-container');
     var errorMessage = document.getElementById('error-message');
@@ -11,6 +20,9 @@ document.getElementById('generate-qr').addEventListener('click', function() {
         errorMessage.textContent = 'Veuillez entrer une URL valide.';
         return;
     }
+    
+    // Remplacer les "+" par des espaces dans l'URL
+    url = url.replace(/\+/g, ' ');
     
     var qrCode = new QRCode(qrContainer, {
         text: url,
@@ -35,4 +47,4 @@ document.getElementById('generate-qr').addEventListener('click', function() {
         });
         qrContainer.appendChild(downloadButton);
     }
-});
+}
