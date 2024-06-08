@@ -13,17 +13,37 @@
         <h2>Wedone Web Apps</h2>
         <div class="category">
             <div class="button-container">
-                <button class="web-app todo" onclick="window.location.href='Wedone-To-Do-List'">
+                <button class="web-app todo" onclick="launchApp('Wedone-To-Do-List')">
                     <img src="logo-todo.png" alt="Logo To Do List" class="button-logo">
                     Wedone To Do List
                 </button>
-                <button class="web-app qr" onclick="window.location.href='Wedone-QR-Code'">
+                <button class="web-app qr" onclick="launchApp('Wedone-QR-Code')">
                     <img src="logo-qr-hover.png" alt="Logo QR Code" class="button-logo" id="qr-logo">
                     Wedone QR Code
                 </button>
                 <a rel="me" href="https://mastodon.social/@wedoneofficiel" class="hidden">Mastodon</a>
+                <button onclick="openSettings()">Paramètres</button>
             </div>
         </div>
     </div>
+
+    <!-- Modal pour les paramètres -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSettings()">&times;</span>
+            <h2>Paramètres</h2>
+            <div class="settings-container">
+                <label class="custom-checkbox">
+                    <input type="checkbox" id="enableIntro" onchange="saveSettings()">
+                    Activer la page de présentation des services
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
