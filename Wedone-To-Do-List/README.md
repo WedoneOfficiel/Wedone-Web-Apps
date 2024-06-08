@@ -15,3 +15,16 @@ Testez l'application ! https://wedoneofficiel.github.io/Boot-projets-Wedone-Offi
 - Exporter les tâches ou les importer*
 
 *Exporter la To Do Liste permet de conserver dans un fichier votre liste afin de pouvoir la réimporter sur un autre ordinateur.
+
+# Nouveautés
+## Récapitulatif des nouveautés de Wedone To Do List avec la mise à jour du 08/06/2024
+-	Changement de mise en page (vue en colonne qui remplace la vue par ligne)
+-	Modification du design de la liste des tâches ainsi que l’apparence des dossiers
+-	Optimisations du code
+-	Utilisation de la touche d’entrée dans les zones de textes
+-	Création d’une fenêtre popup native à l’application pour remplacer l’ancien système pour renommer un dossier
+-	Mise en place du popup de modification du nom pour les tâches et les dossiers (avant cela ne concernait que les dossiers)
+-	Sélection du dossier même après modification du nom
+-	Optimisation de la gestion de la taille des boutons à cocher et de la taille du texte pour les tâches contenant un texte long
+-	Affichage de notifications quand il y a création/modification d’un dossier ou d’une tâche et affichage des erreurs
+-	Et d’autres modifications mineures….
