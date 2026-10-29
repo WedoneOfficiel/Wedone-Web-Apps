@@ -1,50 +1,30 @@
-// script.js
+(()=>{'use strict';
 
-document.addEventListener("DOMContentLoaded", function () {
-    loadSettings();
+})();
 
-    // Close modal when clicking outside of it
-    window.onclick = function (event) {
-        const modal = document.getElementById("settingsModal");
-        if (event.target === modal) {
-            closeSettings();
-        }
-    }
-});
+(()=>{const b=document.getElementById('homeModeToggle'),panel=document.getElementById('portalDashboard');if(!b||!panel)return;const read=(k,fallback)=>{try{return JSON.parse(localStorage.getItem(k)||fallback)}catch{return null}};function update(){const td=read('wedone-todolist-v4','{}'),notes=read('wedoneNotepadNotes','[]'),qr=read('wedone-qr-history-v2','[]');const countTasks=arr=>(arr||[]).reduce((n,t)=>n+1+countTasks(t.subtasks),0);document.getElementById('dashTaskCount').textContent=(td?.folders||[]).reduce((n,f)=>n+countTasks(f.tasks),0);document.getElementById('dashNoteCount').textContent=Array.isArray(notes)?notes.length:0;document.getElementById('dashQrCount').textContent=Array.isArray(qr)?qr.length:0}b.addEventListener('click',()=>{panel.hidden=!panel.hidden;b.setAttribute('aria-pressed',String(!panel.hidden));b.textContent=panel.hidden?'Vue tableau de bord':'Vue portail simple';if(!panel.hidden)update()});window.addEventListener('storage',()=>{if(!panel.hidden)update()})})();
 
-function openSettings() {
-    document.getElementById("settingsModal").style.display = "block";
-}
 
-function closeSettings() {
-    document.getElementById("settingsModal").style.display = "none";
-}
-
-function saveSettings() {
-    const enableIntro = document.getElementById("enableIntro").checked;
-    localStorage.setItem("enableIntro", enableIntro);
-    showNotification("Les paramètres ont été enregistrés.");
-}
-
-function loadSettings() {
-    const enableIntro = localStorage.getItem("enableIntro") === 'true';
-    document.getElementById("enableIntro").checked = enableIntro;
-}
-
-function launchApp(app) {
-    const enableIntro = localStorage.getItem("enableIntro") === 'true';
-    if (enableIntro) {
-        window.location.href = app;
-    } else {
-        window.location.href = `${app}/app.html`;
-    }
-}
-
-function showNotification(message) {
-    const notification = document.getElementById("notification");
-    notification.innerText = message;
-    notification.classList.add("show");
-    setTimeout(() => {
-        notification.classList.remove("show");
-    }, 3000);
-}
+// Wedone V4.0 — sauvegarde/restauration portable de toute la suite.
+(()=>{'use strict';
+ const $=id=>document.getElementById(id);
+ const KEYS=['wedone-todolist-v4','wedoneNotepadNotes','wedone-qr-history-v2','wedone-qr-history-limit','wedone-calendar-events-v1','wedone-settings-v2','wedone-global-theme','wedone-todo-folder-w','wedone-notes-width','wedone-qr-form-width','wedone-notepad-last-text-color','wedone-notepad-last-highlight-color'];
+ const safeId=x=>typeof x==='string'&&/^[A-Za-z0-9_-]{1,180}$/.test(x);
+ const validDate=x=>{if(typeof x!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(x))return false;const [y,m,d]=x.split('-').map(Number),v=new Date(y,m-1,d,12);return v.getFullYear()===y&&v.getMonth()===m-1&&v.getDate()===d};
+ function validateTodo(x){if(!x||typeof x!=='object'||!Array.isArray(x.folders)||x.folders.length>200)return false;const ids=new Set();let count=0;function task(t,depth=0){if(!t||typeof t!=='object'||Array.isArray(t)||depth>20||++count>10000||typeof t.name!=='string'||!t.name.trim()||t.name.length>500)return false;if(t.id!==undefined&&(!safeId(t.id)||ids.has(t.id)))return false;if(t.id)ids.add(t.id);if(t.done!==undefined&&typeof t.done!=='boolean')return false;if(t.expanded!==undefined&&typeof t.expanded!=='boolean')return false;if(t.priority!==undefined&&!['normal','important','urgent'].includes(t.priority))return false;if(t.due!==undefined&&t.due!==''&&!validDate(t.due))return false;if(t.dueTime!==undefined&&t.dueTime!==''&&(typeof t.dueTime!=='string'||!/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(t.dueTime)))return false;if(t.subtasks!==undefined&&!Array.isArray(t.subtasks))return false;return (t.subtasks||[]).every(st=>task(st,depth+1))}for(const f of x.folders){if(!f||typeof f!=='object'||typeof f.name!=='string'||!f.name.trim()||f.name.length>120||!Array.isArray(f.tasks))return false;if(f.id!==undefined&&(!safeId(f.id)||ids.has(f.id)))return false;if(f.id)ids.add(f.id);if(!f.tasks.every(t=>task(t)))return false}return x.selectedFolder===undefined||x.selectedFolder===null||x.folders.some(f=>f.id===x.selectedFolder)}
+ function validateCalendar(x){if(!x||typeof x!=='object'||x.version!==1||!Array.isArray(x.events)||x.events.length>5000)return false;const ids=new Set(),colors=['blue','purple','green','orange','pink'],rec=['none','daily','weekly','monthly','yearly'];return x.events.every(e=>{if(!e||typeof e!=='object'||!safeId(e.id)||ids.has(e.id)||typeof e.title!=='string'||!e.title.trim()||e.title.length>160||!validDate(e.startDate)||!validDate(e.endDate)||e.startDate>e.endDate||typeof e.allDay!=='boolean'||!rec.includes(e.recurrence||'none'))return false;ids.add(e.id);if(e.color!==undefined&&!colors.includes(e.color))return false;if(e.category!==undefined&&(typeof e.category!=='string'||e.category.length>80))return false;if(e.location!==undefined&&(typeof e.location!=='string'||e.location.length>180))return false;if(e.description!==undefined&&(typeof e.description!=='string'||e.description.length>4000))return false;const time=v=>v===undefined||v===''||typeof v==='string'&&/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(v);if(!time(e.startTime)||!time(e.endTime))return false;if(e.recurrenceEnd&&(!validDate(e.recurrenceEnd)||e.recurrenceEnd<e.startDate))return false;if(e.reminder!==undefined&&(!Number.isInteger(e.reminder)||![0,5,15,30,60,1440].includes(e.reminder)))return false;return true})}
+ function normalizeValue(key,raw){if(key==='wedone-global-theme')return ['auto','light','dark'].includes(raw)?raw:null;if(['wedone-notepad-last-text-color','wedone-notepad-last-highlight-color'].includes(key))return typeof raw==='string'&&/^(#[0-9a-f]{3,8}|(?:rgb|hsl)a?\([0-9.,%\s/-]+\)|[a-z]{3,20})$/i.test(raw)?raw:null;let x;try{x=JSON.parse(raw)}catch{return null}
+  if(key==='wedone-todolist-v4'){if(!validateTodo(x))return null;return JSON.stringify(x)}
+  if(key==='wedoneNotepadNotes'){if(!Array.isArray(x)||x.length>1000||!x.every(n=>n&&typeof n==='object'&&safeId(n.id)&&typeof n.title==='string'&&n.title.length<=300&&typeof n.content==='string'&&Number.isFinite(Number(n.updated)))||new Set(x.map(n=>n.id)).size!==x.length)return null;return JSON.stringify(x)}
+  if(key==='wedone-qr-history-v2'){if(!Array.isArray(x)||x.length>100||!x.every(t=>typeof t==='string'&&t.length<=10000))return null;return JSON.stringify(x)}
+  if(key==='wedone-qr-history-limit'){return ['5','10','20','50','100'].includes(String(x))?String(x):null}
+  if(key==='wedone-calendar-events-v1'){if(!validateCalendar(x))return null;return JSON.stringify(x)}
+  if(key==='wedone-settings-v2'){if(!x||typeof x!=='object'||!['auto','light','dark'].includes(x.theme))return null;return JSON.stringify({theme:x.theme})}
+  if(['wedone-todo-folder-w','wedone-notes-width','wedone-qr-form-width'].includes(key)){const n=Number(x);const bounds=key==='wedone-todo-folder-w'?[190,1000]:key==='wedone-notes-width'?[210,430]:[260,2000];return Number.isFinite(n)&&n>=bounds[0]&&n<=bounds[1]?String(n):null}
+  return null;
+ }
+ function downloadBackup(){try{const data={};for(const key of KEYS){const value=localStorage.getItem(key);if(value!==null){const clean=normalizeValue(key,value);if(clean===null)throw Error('invalid:'+key);data[key]=clean}}const payload={app:'Wedone Web Apps',format:'wedone-suite-backup',version:1,exportedAt:new Date().toISOString(),data};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`wedone-sauvegarde-${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);alert('Sauvegarde complète préparée. Conservez le fichier dans un emplacement sûr.')}catch(err){alert(err.message&&err.message.startsWith('invalid:')?'Une donnée locale est invalide ('+err.message.slice(8)+'). Exportez d’abord les données de chaque application et corrigez le problème avant de créer une sauvegarde complète.':'Impossible de lire les données locales. Vérifiez les autorisations du navigateur.')}}
+ async function restoreBackup(file){if(!file)return;if(file.size>20*1024*1024){alert('Fichier trop volumineux (maximum 20 Mo). Aucune donnée n’a été modifiée.');return}try{const payload=JSON.parse(await file.text());if(!payload||payload.format!=='wedone-suite-backup'||payload.version!==1||!payload.data||typeof payload.data!=='object'||Array.isArray(payload.data))throw Error('format');const incoming=payload.data;if(Object.keys(incoming).some(k=>!KEYS.includes(k)))throw Error('keys');const normalized={};for(const [key,value] of Object.entries(incoming)){if(typeof value!=='string')throw Error('value');const clean=normalizeValue(key,value);if(clean===null)throw Error('validation:'+key);normalized[key]=clean}if(!confirm(`Cette sauvegarde Wedone contient ${Object.keys(normalized).length} élément(s) de données. Elle va remplacer les données locales des applications Wedone sur cet appareil. Cette opération ne peut pas être annulée. Avez-vous exporté les données actuelles si vous souhaitez les garder ?`))return;
+ const before={};for(const key of KEYS)before[key]=localStorage.getItem(key);try{for(const key of KEYS){if(Object.prototype.hasOwnProperty.call(normalized,key))localStorage.setItem(key,normalized[key]);else localStorage.removeItem(key)}}catch(err){for(const key of KEYS){try{if(before[key]===null)localStorage.removeItem(key);else localStorage.setItem(key,before[key])}catch{}}throw Error('storage')}alert('Sauvegarde restaurée. Wedone va se recharger pour appliquer les données.');location.reload();}catch(err){alert(err.message==='storage'?'Restauration interrompue : le navigateur n’a pas pu enregistrer toutes les données. Une restauration arrière a été tentée. Libérez de l’espace puis réessayez.':'Fichier invalide ou incompatible. Aucune donnée locale n’a été volontairement remplacée. Vérifiez que le fichier provient d’une sauvegarde Wedone valide.')}}
+ $('backupExport')?.addEventListener('click',downloadBackup);$('backupImport')?.addEventListener('click',()=>$('backupFile')?.click());$('backupFile')?.addEventListener('change',async e=>{const f=e.target.files?.[0];try{await restoreBackup(f)}finally{e.target.value=''}});
+})();

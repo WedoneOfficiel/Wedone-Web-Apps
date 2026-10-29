@@ -1,49 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-    <link rel="icon" href="icon.png" type="image/x-icon">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedone Web Apps Launcher</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#eef5ff"><meta name="description" content="Wedone Web Apps : vos outils personnels, au même endroit."><title>Wedone Web Apps</title><link rel="icon" href="wedone-mark.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="container">
-        <h2>Wedone Web Apps</h2>
-        <div class="category">
-            <div class="button-container">
-                <button class="web-app todo" onclick="launchApp('Wedone-To-Do-List')">
-                    <img src="logo-todo.png" alt="Logo To Do List" class="button-logo">
-                    Wedone To Do List
-                </button>
-                <button class="web-app qr" onclick="launchApp('Wedone-QR-Code')">
-                    <img src="logo-qr-hover.png" alt="Logo QR Code" class="button-logo" id="qr-logo">
-                    Wedone QR Code
-                </button>
-                <a rel="me" href="https://mastodon.social/@wedoneofficiel" class="hidden">Mastodon</a>
-                <button onclick="openSettings()">Paramètres</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal pour les paramètres -->
-    <div id="settingsModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeSettings()">&times;</span>
-            <h2>Paramètres</h2>
-            <div class="settings-container">
-                <label class="custom-checkbox">
-                    <input type="checkbox" id="enableIntro" onchange="saveSettings()">
-                    Activer la page de présentation des services
-                    <span class="checkmark"></span>
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div id="notification" class="notification"></div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+<body class="portal">
+  <main class="portal-main">
+    <header class="portal-top">
+      <div class="portal-brand" aria-label="Wedone"><img class="portal-mark" src="wedone-mark.svg" alt=""><span>Wedone <small>Web Apps</small></span></div>
+      <div class="portal-actions"><span class="portal-caption">Tes outils, au même endroit.</span><button id="homeModeToggle" class="portal-theme" type="button" aria-pressed="false" title="Tester la vue tableau de bord">Vue tableau de bord</button><button id="themeToggle" class="portal-theme" aria-label="Ouvrir les paramètres" title="Paramètres et apparence">◐</button></div>
+    </header>
+    <section class="portal-intro"><span class="portal-kicker">TON ESPACE DE TRAVAIL</span><h1>Qu'est-ce qu'on fait aujourd'hui ?</h1><p>Choisis simplement l'outil dont tu as besoin.</p></section>
+    <section class="portal-apps" aria-label="Applications Wedone">
+      <a class="portal-card todo-card" href="Wedone-To-Do-List/app.html"><span class="portal-icon"><img src="logo-todo.svg" alt=""></span><span class="portal-card-copy"><strong>Wedone To Do List</strong><small>Organise tes tâches et tes projets.</small></span><span class="portal-arrow" aria-hidden="true">↗</span></a>
+      <a class="portal-card note-card" href="Wedone-Notepad/app.html"><span class="portal-icon"><img src="logo-notepad.svg" alt=""></span><span class="portal-card-copy"><strong>Wedone Notepad</strong><small>Écris, mets en forme et garde tes notes.</small></span><span class="portal-arrow" aria-hidden="true">↗</span></a>
+      <a class="portal-card qr-card" href="Wedone-QR-Code/app.html"><span class="portal-icon"><img src="logo-qr.svg" alt=""></span><span class="portal-card-copy"><strong>Wedone QR Code</strong><small>Génère, copie et télécharge tes QR Codes.</small></span><span class="portal-arrow" aria-hidden="true">↗</span></a><a class="portal-card calendar-card" href="Wedone-Calendar/app.html"><span class="portal-icon"><img src="logo-calendar.svg" alt=""></span><span class="portal-card-copy"><strong>Wedone Calendar</strong><small>Planifie tes rendez-vous et retrouve tes tâches datées.</small></span><span class="portal-arrow" aria-hidden="true">↗</span></a>
+    </section>
+    <section class="portal-backup" aria-labelledby="backupTitle"><div class="portal-backup-copy"><span class="backup-symbol" aria-hidden="true">↗</span><div><h2 id="backupTitle">Sauvegarde de Wedone</h2><p>Exportez vos données des quatre applications dans un seul fichier portable, ou restaurez une sauvegarde sur cet appareil.</p><small>La sauvegarde reste sur votre appareil jusqu’à ce que vous choisissiez où enregistrer le fichier.</small></div></div><div class="portal-backup-actions"><button type="button" id="backupExport" class="backup-primary">Exporter toute la suite</button><button type="button" id="backupImport" class="backup-secondary">Restaurer une sauvegarde</button><input type="file" id="backupFile" accept=".json,application/json" hidden></div></section>
+    <section id="portalDashboard" class="portal-dashboard" hidden aria-live="polite"><h2>Un aperçu de ton espace</h2><div class="portal-dashboard-grid"><article><strong id="dashTaskCount">—</strong><span>Tâches enregistrées</span></article><article><strong id="dashNoteCount">—</strong><span>Notes enregistrées</span></article><article><strong id="dashQrCount">—</strong><span>QR Codes récents</span></article></div><p>Ces chiffres sont calculés à partir des données disponibles dans ce navigateur.</p></section><footer class="portal-footer"><span>Wedone Web Apps</span><span>Simple, utile, à ton image.</span></footer>
+  </main>
+  <script src="shared.js"></script><script src="script.js"></script>
+</body></html>

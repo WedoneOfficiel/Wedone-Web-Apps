@@ -1,22 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Wedone QR Code</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="icon.png" type="image/x-icon">
-    <script src="qrcode.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <h1>Wedone QR Code</h1>
-        <div class="input-container">
-            <input type="text" id="url-input" placeholder="Entrez un lien..." autocomplete="off">
-            <button id="generate-qr">Générer le QR Code</button>
-        </div>
-        <div id="error-message" class="error-message"></div>
-        <div id="qr-container"></div>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#d4f1e6"><title>Wedone QR Code</title><link rel="icon" href="../logo-qr.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"></head><body><div class="shell"><header class="top"><a class="brand" href="../index.html"><span>Wedone</span></a><div class="app-heading">Wedone <span>QR Code</span></div><div class="top-actions"><button id="themeBtn" class="iconbtn" aria-label="Ouvrir les paramètres" title="Paramètres et apparence">◐</button></div></header><main class="qr-main"><aside class="qr-rail" aria-label="Navigation QR Code"><button class="qr-railbtn active" data-tab="create"><span>▦</span><small>Créer</small></button><button class="qr-railbtn" data-tab="history"><span>◷</span><small>Historique</small></button></aside><section class="qr-panel"><div class="panel-intro"><span class="eyebrow">GÉNÉRATEUR</span><h1>Créer un QR Code</h1><p class="intro-sub">Transformez un lien ou un texte en QR Code, prêt à partager.</p></div><div class="qr-workspace"><div class="qr-form"><label for="urlInput">Contenu du QR Code</label><textarea id="urlInput" class="url-input" rows="4" placeholder="https://exemple.com ou n’importe quel texte…" autocomplete="off" autocorrect="off" spellcheck="false"></textarea><div class="input-actions"><button id="generateBtn" class="primary">Générer le QR Code</button></div><div id="errorMsg" class="error-msg" role="alert" aria-live="polite"></div></div><div class="qr-splitter" id="qrSplitter" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Redimensionner le formulaire et le résultat" title="Glisser pour redimensionner"></div><section class="qr-preview"><div class="preview-heading"><span class="eyebrow">APERÇU</span><span class="preview-status" id="previewStatus">En attente</span></div><div id="qrOutput" class="qr-output" aria-label="QR code généré"><div class="qr-placeholder"><span>▦</span><strong>Votre QR Code apparaîtra ici</strong><small>Entrez un contenu puis sélectionnez Générer.</small></div></div></section></div></section><section class="qr-history-panel hidden" id="historyPanel"><div class="history-heading"><div><span class="eyebrow">VOTRE COLLECTION</span><h1>Historique</h1><p class="intro-sub">Retrouvez vos QR Codes récents et réutilisez-les.</p></div></div><div class="history-settings"><label for="historyLimit">Conserver</label><select id="historyLimit"><option value="5">5 QR Codes</option><option value="10" selected>10 QR Codes</option><option value="20">20 QR Codes</option><option value="50">50 QR Codes</option><option value="100">100 QR Codes</option></select><span>sur cet appareil</span></div><div id="qrHistory" class="qr-history history-list"><p class="history-empty">Vos derniers QR Codes apparaîtront ici.</p></div><button id="clearHistory" class="clear-history">Vider l’historique…</button></section></main></div>
+
+<div class="wd-dialog-backdrop" id="appDialog" aria-hidden="true"><section class="wd-dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle"><span class="wd-dialog-kicker">WEDONE · QR CODE</span><h2 id="dialogTitle">Information</h2><p id="dialogMessage"></p><div class="wd-dialog-actions"><button id="dialogConfirm" class="wd-dialog-primary">Compris</button></div></section></div>
+
+<script src="qrcode.min.js"></script><script src="../shared.js"></script><script src="script.js"></script></body></html>

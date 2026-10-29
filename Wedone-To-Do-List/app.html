@@ -1,81 +1,20 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <link rel="icon" href="icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <meta charset="UTF-8">
-    <title>Wedone To Do List</title>
-</head>
-<body>
-    <div class="container">
-        <h1>Wedone To Do List</h1>
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ede8ff"><title>Wedone To Do List</title><link rel="icon" href="../logo-todo.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"></head><body><div class="shell"><header class="top"><div class="app-heading" aria-label="Application actuelle">Wedone <span>To Do List</span></div><a class="brand" href="../index.html"><span>Wedone</span></a><div class="top-actions"><button id="themeBtn" class="iconbtn" aria-label="Ouvrir les paramètres" title="Paramètres et apparence">◐</button><button id="importBtn" class="iconbtn" title="Importer les données">Importer</button><button id="exportBtn" class="primary">Exporter</button></div></header><main><aside class="rail todo-rail" aria-label="Filtres des tâches"><button class="railbtn active" data-filter="all" title="Toutes les tâches"><span>▤</span><small>Toutes</small></button><button class="railbtn" data-filter="today" title="Échéance aujourd’hui"><span>◷</span><small>Aujourd’hui</small></button><button class="railbtn" data-filter="upcoming" title="Échéances à venir"><span>↗</span><small>À venir</small></button><button class="railbtn" data-filter="done" title="Terminées"><span>✓</span><small>Terminées</small></button><button class="railbtn" data-filter="overdue" title="En retard"><span>◷</span><small>En retard</small></button><div class="railspacer"></div><button class="railbtn" id="railImport" title="Importer"><span>⇧</span><small>Importer</small></button></aside><section class="folders-panel" aria-label="Dossiers"><div class="panel-head"><div><span class="eyebrow">VOS LISTES</span><h1>Dossiers</h1></div><button class="round" id="newFolderBtn" aria-label="Nouveau dossier">＋</button></div><div class="folder-create-row"><input id="folderNameInput" class="search" placeholder="Nom du nouveau dossier…" maxlength="120"><button id="createFolderInline" class="add-btn" aria-label="Créer le dossier">＋</button></div><button id="toggleFolderSearch" class="search-toggle" type="button">⌕ Rechercher un dossier</button><input id="folderSearch" class="search folder-search hidden" placeholder="Rechercher un dossier…" type="search"><div id="folderList" class="folder-list" aria-label="Liste des dossiers"></div><p class="panel-help">Clic droit sur un dossier pour le renommer ou supprimer.</p></section><div class="splitter" id="splitter" role="separator" aria-label="Redimensionner" aria-orientation="vertical" tabindex="0" title="Glisser pour redimensionner"></div><section class="tasks-panel" aria-label="Tâches"><div class="panel-head"><div><span class="eyebrow" id="tasksFolderLabel">SÉLECTIONNEZ UN DOSSIER</span><h1 id="tasksPanelTitle">Tâches</h1></div><button class="round" id="newTaskBtn" aria-label="Nouvelle tâche" title="Ajouter une tâche">＋</button></div><div class="task-input-row"><input id="taskInput" class="search" placeholder="Nouvelle tâche…" type="text"><button id="taskDueInput" class="due-input" type="button" aria-label="Choisir une échéance" title="Choisir une échéance">Date</button><button id="addTaskBtn" class="add-btn" aria-label="Ajouter">＋</button></div><ul id="taskList" class="task-list" aria-label="Liste des tâches"></ul><p class="panel-help" id="tasksHelp">Clic droit sur une tâche pour la modifier ou supprimer · Glisser pour réorganiser</p></section></main></div>
+<div class="wd-dialog-backdrop" id="dateDialog" aria-hidden="true"><section class="wd-dialog date-dialog" role="dialog" aria-modal="true" aria-labelledby="dateDialogTitle"><span class="wd-dialog-kicker">WEDONE · ÉCHÉANCE</span><h2 id="dateDialogTitle">Choisir une date</h2><div class="calendar-head"><button type="button" id="calPrev" class="wd-dialog-secondary">‹</button><strong id="calMonth"></strong><button type="button" id="calNext" class="wd-dialog-secondary">›</button></div><div id="calendarGrid" class="calendar-grid"></div><label class="calendar-time-label" for="dueTimeInput">Heure (facultative)</label><input id="dueTimeInput" class="wd-dialog-input calendar-time-input" type="text" inputmode="numeric" placeholder="HH:MM" maxlength="5" aria-describedby="dueTimeHelp"><small id="dueTimeHelp" class="calendar-time-help">Format 24 h, par exemple 14:30</small><div class="wd-dialog-actions"><button id="clearDue" class="wd-dialog-secondary">Effacer</button><button id="cancelDate" class="wd-dialog-secondary">Annuler</button><button id="confirmDate" class="wd-dialog-primary">Choisir</button></div></section></div>
 
-        <div class="main-content">
-            <div class="folder-section">
-                <div class="input-container">
-                    <input type="text" id="folder-input" placeholder="Ajouter un dossier...">
-                    <button id="add-folder">+<i class="fas fa-folder-plus"></i></button>
-                </div>
-                <div class="folder-container" id="folder-container">
-                    <!-- Les dossiers seront ajoutés ici -->
-                </div>
-            </div>
+<input type="file" id="importFile" accept=".json" hidden>
 
-            <div class="task-section">
-                <div class="input-container">
-                    <input type="text" id="task-input" placeholder="Ajouter une tâche...">
-                    <button id="add-task">+<i class="fas fa-plus"></i></button>
-                </div>
-                <ul id="task-list">
-                    <!-- Les tâches seront ajoutées ici -->
-                </ul>
-            </div>
-        </div>
+<div id="folderContextMenu" class="wd-context-menu" role="menu">
+  <button id="ctxFolderEdit" role="menuitem">Renommer le dossier…</button>
+  <button id="ctxFolderDelete" role="menuitem" class="danger">Supprimer le dossier</button>
+</div>
+<div id="taskContextMenu" class="wd-context-menu" role="menu">
+  <button id="ctxTaskEdit" role="menuitem">Modifier la tâche…</button>
+  <button id="ctxTaskSub" role="menuitem">Ajouter une sous-tâche…</button>
+  <button id="ctxTaskDue" role="menuitem">Définir l’échéance…</button>
+  <div class="ctx-priority-label">Priorité</div><button id="ctxTaskPriorityNormal" role="menuitem">Normale</button><button id="ctxTaskPriorityImportant" role="menuitem">Importante</button><button id="ctxTaskPriorityUrgent" role="menuitem">Urgente</button>
+  <button id="ctxTaskDelete" role="menuitem" class="danger">Supprimer la tâche</button>
+</div>
 
-        <div class="export-import-container">
-            <button id="export">Exporter</button>
-            <button id="import">Importer</button>
-            <input type="file" id="import-file" accept=".json" style="display: none">
-        </div>
-    </div>
+<div class="wd-dialog-backdrop" id="appDialog" aria-hidden="true"><section class="wd-dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle"><span class="wd-dialog-kicker">WEDONE · TO DO LIST</span><h2 id="dialogTitle">Confirmer</h2><p id="dialogMessage"></p><input id="dialogInput" class="wd-dialog-input" hidden maxlength="120"><div class="wd-dialog-actions"><button id="dialogCancel" class="wd-dialog-secondary">Annuler</button><button id="dialogConfirm" class="wd-dialog-primary">Confirmer</button></div></section></div>
 
-    <!-- Fenêtre modale pour les dossiers -->
-    <div id="folder-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="close-folder-modal">&times;</span>
-            <h2 id="folder-modal-title">Modifier le dossier</h2>
-            <input type="text" id="folder-modal-input" placeholder="Nom du dossier">
-            <button id="save-folder-modal">Enregistrer</button>
-        </div>
-    </div>
-
-    <!-- Fenêtre modale pour les tâches -->
-    <div id="task-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="close-task-modal">&times;</span>
-            <h2 id="task-modal-title">Modifier la tâche</h2>
-            <input type="text" id="task-modal-input" placeholder="Nom de la tâche">
-            <button id="save-task-modal">Enregistrer</button>
-        </div>
-    </div>
-
-    <div id="folder-context-menu" class="context-menu">
-        <ul>
-            <li id="edit-folder">Modifier le dossier</li>
-            <li id="delete-folder">Supprimer le dossier</li>
-        </ul>
-    </div>
-    
-    <div id="task-context-menu" class="context-menu">
-        <ul>
-            <li id="edit-task">Modifier la tâche</li>
-            <li id="delete-task">Supprimer la tâche</li>
-        </ul>
-    </div>    
-
-    <div class="notification-container" id="notification-container"></div>
-
-
-    <script src="script.js"></script>
-</body>
-</html>
+<script src="../shared.js"></script><script src="script.js"></script></body></html>
