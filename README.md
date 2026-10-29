@@ -16,7 +16,7 @@ Wedone rassemble quatre outils dans un portail unique, sans compte et sans servi
 ## Lancer le projet
 
 - **En local :** ouvrir `index.html` dans un navigateur moderne. Certaines fonctions de navigateur peuvent nécessiter un serveur local HTTP.
-- **GitHub Pages :** publier le contenu de la branche principale à la racine du dépôt. Le workflow `.github/workflows/jekyll-gh-pages.yml` assure le déploiement Pages.
+- **GitHub Pages :** publier le contenu de la branche principale à la racine du dépôt. Le workflow `.github/workflows/jekyll-gh-pages.yml` publie directement les fichiers statiques utiles (sans compilation Jekyll), afin d’éviter qu’un ancien thème ou des fichiers de build ne modifient le portail.
 
 ## Données et confidentialité
 
@@ -29,6 +29,10 @@ Wedone rassemble quatre outils dans un portail unique, sans compte et sans servi
 ## Identité visuelle
 
 Les logos des quatre applications sont conservés. Le logo principal du portail est volontairement absent de cette archive afin que son auteur puisse ajouter la version finale validée. Le portail est déjà configuré pour charger le fichier **`wedone-mark.svg`** à la racine du dépôt : il sera utilisé comme icône de navigateur (favicon) et comme symbole dans l’en-tête, à côté du nom. Le fichier image lui-même est volontairement omis de cette archive ; ajoute ton SVG final à la racine avec exactement ce nom. Aucun autre code ne devrait être nécessaire.
+
+## Nettoyage du portail
+
+Le portail charge uniquement les règles de `style.css` qui lui sont destinées. Les anciens styles du tableau de bord et le bouton expérimental « Vue tableau de bord » ont été retirés. Le workflow de publication assemble explicitement les fichiers du site ; les anciens PNG ou CSS inutilisés laissés dans le dépôt ne sont donc pas copiés dans le site publié.
 
 ## Contrôles de qualité
 
@@ -55,3 +59,8 @@ Ils couvrent notamment la validation des données importées, les dates et récu
 ## Licence
 
 Consulter `LICENSE` et les fichiers de licence inclus avec les composants concernés.
+
+
+## Déploiement GitHub Pages — correctif 2.0.1
+
+Pour éviter de conserver un ancien JavaScript/CSS en cache, les références du portail utilisent un identifiant de version `v=2.0.1`. Lors d’une mise à jour, remplacez les fichiers du dépôt par le contenu complet de cette archive (pas le ZIP lui-même), puis vérifiez que `index.html`, `style.css`, `shared.js` et `script.js` se trouvent tous à la racine du dépôt publié. Le fichier `.nojekyll` indique que le site est statique.

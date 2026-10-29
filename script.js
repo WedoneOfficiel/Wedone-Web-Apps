@@ -1,11 +1,4 @@
-(()=>{'use strict';
-
-})();
-
-(()=>{const b=document.getElementById('homeModeToggle'),panel=document.getElementById('portalDashboard');if(!b||!panel)return;const read=(k,fallback)=>{try{return JSON.parse(localStorage.getItem(k)||fallback)}catch{return null}};function update(){const td=read('wedone-todolist-v4','{}'),notes=read('wedoneNotepadNotes','[]'),qr=read('wedone-qr-history-v2','[]');const countTasks=arr=>(arr||[]).reduce((n,t)=>n+1+countTasks(t.subtasks),0);document.getElementById('dashTaskCount').textContent=(td?.folders||[]).reduce((n,f)=>n+countTasks(f.tasks),0);document.getElementById('dashNoteCount').textContent=Array.isArray(notes)?notes.length:0;document.getElementById('dashQrCount').textContent=Array.isArray(qr)?qr.length:0}b.addEventListener('click',()=>{panel.hidden=!panel.hidden;b.setAttribute('aria-pressed',String(!panel.hidden));b.textContent=panel.hidden?'Vue tableau de bord':'Vue portail simple';if(!panel.hidden)update()});window.addEventListener('storage',()=>{if(!panel.hidden)update()})})();
-
-
-// Wedone V4.0 — sauvegarde/restauration portable de toute la suite.
+// Wedone Web Apps — sauvegarde/restauration portable de toute la suite.
 (()=>{'use strict';
  const $=id=>document.getElementById(id);
  const KEYS=['wedone-todolist-v4','wedoneNotepadNotes','wedone-qr-history-v2','wedone-qr-history-limit','wedone-calendar-events-v1','wedone-settings-v2','wedone-global-theme','wedone-todo-folder-w','wedone-notes-width','wedone-qr-form-width','wedone-notepad-last-text-color','wedone-notepad-last-highlight-color'];
