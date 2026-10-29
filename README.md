@@ -14,7 +14,6 @@ Le portail centralise les préférences communes, notamment le thème d’affich
 - [Données et confidentialité](#données-et-confidentialité)
 - [Identité visuelle](#identité-visuelle)
 - [Historique des versions](#historique-des-versions)
-- [Limites connues](#limites-connues)
 - [Licence](#licence)
 
 ## Applications
@@ -275,14 +274,6 @@ Aucune autre modification du code ne devrait être nécessaire si le fichier res
 - Tests des validateurs de sauvegarde des quatre applications et des préférences communes.
 - Amélioration de la gestion des erreurs et des protections contre la perte de données.
 - Nettoyage des anciens styles et éléments inutilisés.
-
-## Limites connues
-
-- Les données sont locales au navigateur et ne sont pas automatiquement synchronisées entre appareils.
-- Les notifications dépendent du navigateur, des permissions et de l’exécution en arrière-plan.
-- Une sauvegarde externe reste recommandée avant toute restauration ou opération importante.
-- Les tests automatisés ne couvrent pas nécessairement tous les parcours interactifs, tous les navigateurs ou tous les cas limites.
-- Certaines fonctionnalités du navigateur peuvent nécessiter un accès via HTTP ou HTTPS plutôt qu’une ouverture directe du fichier HTML.
 
 ## Licence
 
